@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    /* === File Paths === */
+    "rootDir": "./src",             // Where your TS code lives
+    "outDir": "./dist",             // Build output folder
+
+    /* === Target Environment === */
+    "module": "ESNext",              // Modern ES modules for Vite
+    "target": "ES2020",              // New JS features, but still browser-compatible
+    "moduleResolution": "Node",      // Resolve imports like Node
+    "lib": ["ES2020", "DOM"],         // Include browser + modern JS APIs
+
+    /* === Type Definitions === */
+    "types": ["three"],              // Pull in Three.js type info
+    "esModuleInterop": true,         // Allow clean import syntax
+    "allowSyntheticDefaultImports": true,
+
+    /* === Debugging === */
+    "sourceMap": true,               // Map JS output back to TS for debugging
+
+    /* === Strictness === */
+    "strict": true,                  // All strict type checks
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+
+    /* === Performance === */
+    "skipLibCheck": true,            // Skip checking node_modules for faster builds
+
+    /* === Module Syntax === */
+    "moduleDetection": "force",
+    "isolatedModules": true
+  },
+  "include": ["src"],                // Only compile files in /src
+  "exclude": ["node_modules", "dist"]
+}
