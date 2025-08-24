@@ -1,12 +1,10 @@
-// src/Physics.ts
 import * as RAPIER from '@dimforge/rapier3d-compat';
 
 let world: RAPIER.World | null = null;
 
 export async function initPhysics(): Promise<RAPIER.World> {
-  await RAPIER.init();
 
-  // Gravity pointing down Y
+  await RAPIER.init();
   const gravity = { x: 0.0, y: -9.81, z: 0.0 };
   world = new RAPIER.World(gravity);
 
@@ -20,7 +18,7 @@ export function stepPhysics(deltaTime: number = 1 / 60): void {
 
 export function getWorld(): RAPIER.World {
   if (!world) {
-    throw new Error('Physics world not initialized! Call initPhysics() first.');
+    throw new Error('Physics world not initialized - call initPhysics() first');
   }
   return world;
 }

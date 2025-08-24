@@ -1,1 +1,361 @@
-<script type="module" src="/src/main.ts"></script> 
+<body>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  
+    <div id="overlay" class="retro">
+        <div class="crt"></div>
+  
+        <div class="frame">
+            <div class="flags">
+              <div class="flag left">
+                <span class="pole"></span>
+                <span class="cloth"></span>
+              </div>
+              <div class="flag right">
+                <span class="pole"></span>
+                <span class="cloth"></span>
+              </div>
+            </div>
+  
+        <h1 class="logo">
+          <span class="title">BURNT&nbsp;CLUTCH</span>
+          <span class="flame left"></span>
+          <span class="flame right"></span>
+        </h1>
+  
+        <div class="picker">
+          <div class="group">
+            <div class="label">VEHICLE</div>
+            <div class="choices" id="vehicleChoices">
+              <button class="chip" data-vehicle="truck">TRUCK</button>
+              <button class="chip" data-vehicle="corvette">CORVETTE</button>
+              <button class="chip" data-vehicle="silvia">SILVIA</button>
+              <button class="chip" data-vehicle="quattro">QUATTRO</button>
+              <button class="chip" data-vehicle="e82">E82</button>
+            </div>
+          </div>
+  
+          <div class="group">
+            <div class="label">MAP</div>
+            <div class="choices" id="mapChoices">
+              <button class="chip" data-map="blitzway">BLITZWAY</button>
+              <button class="chip" data-map="speedway">SPEEDWAY</button>
+              <button class="chip" data-map="cherry_fields">CHERRY FIELDS</button>
+            </div>
+          </div>
+        </div>
+  
+        <button id="readyBtn" class="ready" disabled>READY</button>
+        <p id="loadingText" class="loadmsg">Click READY to start</p>
+      </div>
+  
+      <div class="credits">
+        <div>Made by Andrew Goodson - August 2025</div>
+        <div>
+          <a href="https://github.com/RustyShackleford007/burnt-clutch" target="_blank" rel="noopener">
+            github.com/RustyShackleford007/burnt-clutch
+          </a>
+        </div>
+      </div>
+    </div>
+  
+    <script type="module" src="/src/main.ts"></script>
+</body>
+  
+<style>
+
+    :root {
+        --bg1:#0b0f1a;
+        --bg2:#1b2140;
+        --neon:#ff2bd6;
+        --neon2:#2bffe0;
+        --accent:#ffd047;
+        --good:#00ff9c;
+        --muted:#9aa3b2;
+    }
+
+    html, body {
+        margin: 0; 
+        height: 100%; 
+        overflow: hidden; 
+        background: radial-gradient(1200px 600px at 50% 100%, #151c31 0%, var(--bg1) 40%, #000 100%);
+    }
+
+    #overlay {
+        position: fixed; 
+        inset: 0; 
+        z-index: 9999; 
+        display: grid; 
+        place-items: center; 
+        font-family: "Press Start 2P", system-ui, sans-serif;
+    }
+
+    #overlay.fade-out {
+        opacity: 0;
+        transition: opacity .35s ease; 
+        pointer-events: none;
+    }
+  
+    .crt {
+        position: absolute; 
+        inset: 0; 
+        background: linear-gradient(transparent 0 2px, rgba(0,0,0,.15) 2px 3px) repeat-y, radial-gradient(1200px 600px at 50% 100%, var(--bg2) 0%, transparent 60%);
+        background-size: 100% 3px, auto;
+        mix-blend-mode: overlay;
+        pointer-events: none; 
+        opacity: .4;
+    }
+  
+    .frame {
+        position: relative;
+        width: min(92vw, 760px);
+        padding: 28px 28px 24px;
+        text-align: center;
+        color:#fff;
+        border-radius: 18px;
+        backdrop-filter: blur(6px);
+        background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+        box-shadow:
+            0 0 0 2px rgba(255,255,255,.08) inset,
+            0 0 30px 6px rgba(255, 43, 214, .25),
+            0 0 60px 12px rgba(43, 255, 224, .15);
+    }
+  
+    .logo {
+        position: relative;
+        margin: 0 0 18px;
+    }
+
+    .title {
+      display: inline-block;
+      font-size: clamp(28px, 7vw, 56px);
+      letter-spacing: 2px;
+      color:#fff;
+      text-shadow:
+        2px  2px  0  #000,
+        -2px 2px  0  #000,
+        2px  -2px 0  #000,
+        -2px -2px 0  #000,
+        0    0    16px var(--neon2),
+        0    0    28px var(--neon);
+      image-rendering: pixelated;
+    }
+
+    .flame {
+        position: absolute;
+        top: -6px;
+        width: 80px;
+        height: 80px;
+        filter: contrast(140%) saturate(120%);
+        background:
+            radial-gradient(circle at 50% 80%, rgba(255,255,255,.9), rgba(255,255,255,0) 50%),
+            radial-gradient(circle at 50% 70%, #ffe66b, transparent 55%),
+            radial-gradient(circle at 50% 50%, #ff9e00, transparent 60%),
+            radial-gradient(circle at 50% 30%, #ff3b00, transparent 65%),
+            radial-gradient(circle at 50% 10%, #ff0000, transparent 70%);
+        mix-blend-mode: screen;
+        transform-origin: 50% 90%;
+        animation: flame 0.12s infinite steps(2);
+    }
+
+    .flame.left {
+        left: -88px;
+        transform: scaleX(-1);
+    }
+
+    .flame.right {
+        right: -88px;
+    }
+
+    @keyframes flame {
+        0%   { transform: translateY(0)    scale(1)    rotate(-2deg); }
+        50%  { transform: translateY(-2px) scale(1.05) rotate(2deg);  }
+        100% { transform: translateY(0)    scale(1)    rotate(-2deg); }
+    }
+  
+    .picker {
+        display: grid;
+        gap: 16px;
+        margin: 10px 0 10px;
+    }
+
+    .group {
+        display: grid;
+        gap: 8px;
+    }
+
+    .label {
+        color: var(--accent);
+        font-size: 12px;
+        letter-spacing: 2px;
+    }
+
+    .choices {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+    }
+
+    .chip {
+        font: inherit;
+        letter-spacing: 1px;
+        color:#fff;
+        background: linear-gradient(180deg, #19213e, #0f1430);
+        border: 2px solid #334;
+        border-radius: 10px;
+        padding: 10px 14px;
+        cursor: pointer;
+        box-shadow: 0 0 0 2px #000 inset, 0 4px 0 0 #0005;
+        transition: transform .05s, box-shadow .05s, border-color .15s;
+    }
+
+    .chip:hover {
+        transform: translateY(-1px);
+        border-color: var(--neon2);
+    }
+
+    .chip.selected {
+        border-color: var(--good);
+        box-shadow: 0 0 0 2px #000 inset, 0 0 20px 2px rgba(0,255,156,.35);
+    }
+  
+    .ready {
+        margin-top: 6px;
+        padding: 12px 24px;
+        border-radius:12px;
+        border:0;
+        cursor:pointer;
+        font: inherit;
+        letter-spacing:2px;
+        color:#000;
+        background: linear-gradient(180deg, #00ff9c, #00d37f);
+        box-shadow: 0 4px 0 0 #008a58, 0 0 22px 4px rgba(0,255,156,.35);
+        transition: transform .05s;
+    }
+
+    .ready:disabled {
+        background: linear-gradient(180deg, #4a5b57, #2a3432);
+        color:#cfe8dd;
+        opacity: .6;
+        cursor: not-allowed;
+        box-shadow: none;
+    }
+
+    .ready:not(:disabled):active {
+        transform: translateY(2px);
+        box-shadow: 0 2px 0 0 #008a58;
+    }
+
+    .loadmsg {
+        margin: 10px 0 0;
+        font-size: 11px;
+        color: var(--muted);
+    }
+  
+    .flags {
+        position: absolute;
+        top: -84px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: min(84vw, 700px);
+        height: 110px;
+        pointer-events: none;
+        z-index: 2;
+    }
+    .flag {
+        position: absolute;
+        bottom: 0;
+        width: 220px;
+        height: 110px;
+        filter: drop-shadow(0 6px 0 rgba(0,0,0,.35));
+    }
+
+    .flag.left {
+        left:0;
+        transform: rotate(-10deg);
+    }
+
+    .flag.right {
+        right: 0;
+        transform: rotate(10deg) scaleX(-1);
+    }
+  
+    .pole {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 8px;
+        height: 100%;
+        background: linear-gradient(180deg, #777, #333);
+        box-shadow: 0 0 0 2px #000 inset;
+        border-radius: 3px;
+    }
+
+    .cloth {
+        position: absolute;
+        left: 10px;
+        top: 12px;
+        width: 180px;
+        height: 76px;
+        border: 3px solid #000;
+        border-radius: 6px;
+        image-rendering: pixelated;
+        background:
+            linear-gradient(45deg,#fff 25%,#000 25%,#000 50%,#fff 50%,#fff 75%,#000 75%,#000 100%),
+            linear-gradient(45deg,#fff 25%,#000 25%,#000 50%,#fff 50%,#fff 75%,#000 75%,#000 100%);
+        background-size: 16px 16px;
+        background-position: 0 0, 8px 8px;
+        transform-origin: 0% 50%;
+        animation:
+            flagWave 0.9s steps(3) infinite alternate,
+            flagFlutter 2.2s ease-in-out infinite;
+    }
+  
+    @keyframes flagWave {
+      0%   { transform: perspective(400px) rotateY(0deg) skewY(0deg); }
+      100% { transform: perspective(400px) rotateY(14deg) skewY(-3deg); }
+    }
+
+    @keyframes flagFlutter {
+      0%   { background-position: 0px 0, 8px 8px; }
+      50%  { background-position: 6px 0, 14px 8px; }
+      100% { background-position: 0px 0, 8px 8px; }
+    }
+  
+    .credits {
+        position: absolute;
+        right: 16px;
+        bottom: 14px;
+        text-align: right;
+        color: #e6e9ef;
+        font-family: "Press Start 2P", system-ui, sans-serif;
+        font-size: 10px;
+        line-height: 1.6;
+        text-shadow:
+            1px 1px 0 #000,
+            0 0 10px rgba(43,255,224,.25);
+        opacity: .9;
+    }
+
+    .credits a {
+        color: #2bffe0;
+        text-decoration: none;
+        border-bottom: 1px dashed rgba(43,255,224,.6);
+    }
+
+    .credits a:hover {
+        color: #00ff9c;
+        border-bottom-color: rgba(0,255,156,.9);
+    }
+
+    @media (max-width: 520px) {
+        .flags { top:-72px; height:90px; }
+        .flag  { width:170px; height:90px; }
+        .cloth { width:140px; height:64px; }
+        .credits { font-size: 9px; right: 10px; bottom: 10px; }
+    }
+
+  </style>
+  
