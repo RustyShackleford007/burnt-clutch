@@ -10,13 +10,13 @@ export const MAPS = {
   speedway: {
     name: 'speedway',
     url: '/models/tracks/speedway_edit.glb',
-    spawn: new THREE.Vector3(200, 20, 770),
+    spawn: new THREE.Vector3(770, 3, 435),
     scale: 0.8,
   },
   cherry_fields: {
     name: 'cherry_fields',
     url: '/models/tracks/cherry_fields.glb',
-    spawn: new THREE.Vector3(115, 5, -23),
+    spawn: new THREE.Vector3(22.6, 8, -78.6),
     scale: 70,
   }
 }

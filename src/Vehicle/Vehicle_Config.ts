@@ -43,8 +43,8 @@ export const VEHICLES = {
     url: '/models/cars/quattro.glb',
     stats: {
       speed: 25,
-      accel: 5,
-      turnSpeed: 3, 
+      accel: 7,
+      turnSpeed: 2.2, 
       r_speed: 8,
       r_accel: 2.5,
       longSpeed: 0,
@@ -54,17 +54,17 @@ export const VEHICLES = {
     }
   },
   e82: {
-    url: '/models/cars/E82_edit_two.glb',
+    url: '/models/cars/E82.glb',
     stats: {
-      speed: 25,
-      accel: 5,
-      turnSpeed: 3, 
+      speed: 28,
+      accel: 13,
+      turnSpeed: 2.5, 
       r_speed: 8,
       r_accel: 2.5,
       longSpeed: 0,
       coastDecel: 3,
-      brakeDecel: 10,
-      scale: 1.4
+      brakeDecel: 15,
+      scale: 1.2
     }
   },
   silvia: {

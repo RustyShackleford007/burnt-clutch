@@ -138,6 +138,8 @@ export class Car {
       quat.multiply(turnQ);
       this.body.setRotation({ x: quat.x, y: quat.y, z: quat.z, w: quat.w }, true);
     }
+
+    console.log(this.mesh.position.x, this.mesh.position.y, this.mesh.position.z);
   
     const pos = this.body.translation();
     this.mesh.position.set(pos.x, pos.y, pos.z);
