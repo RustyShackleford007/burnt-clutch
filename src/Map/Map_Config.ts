@@ -9,7 +9,7 @@ export const MAPS = {
   },
   speedway: {
     name: 'speedway',
-    url: '/models/tracks/speedway_edit.glb',
+    url: '/models/tracks/speedway.glb',
     spawn: new THREE.Vector3(770, 3, 435),
     scale: 0.8,
   },
