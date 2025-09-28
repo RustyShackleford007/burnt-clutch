@@ -1,6 +1,6 @@
 # Burnt Clutch
 
-Buckle up for a high-octane 3D racing web application developed using [Three.js](https://threejs.org/) and [Rapier.js](https://rapier.rs/). Development was done using TypeScript. 
+Buckle up for a high-octane 3D racing web application developed using [Three.js](https://threejs.org/) and [Rapier.js](https://rapier.rs/). Development was done using TypeScript. Check out my [LinkedIn](https://linkedin.com/in/andrew-goodson)!
 
 This was my first time working in 3 dimensions, and it taught me a lot - I hope you enjoy!
 
